@@ -1,0 +1,10 @@
+entity.drawing.add_form:
+  route_name: entity.drawing.add_page
+  title: 'Add Drawing'
+  appears_on:
+    - entity.drawing.collection
+entity.drawing_type.add_form:
+  route_name: entity.drawing_type.add_form
+  title: 'Add Drawing type'
+  appears_on:
+    - entity.drawing_type.collection

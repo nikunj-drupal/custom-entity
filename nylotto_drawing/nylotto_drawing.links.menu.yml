@@ -1,0 +1,17 @@
+
+# Drawing menu items definition
+entity.drawing.collection:
+  title: 'Drawing list'
+  route_name: entity.drawing.collection
+  description: 'List Drawing entities'
+  parent: system.admin_structure
+  weight: 100
+
+
+# Drawing type menu items definition
+entity.drawing_type.collection:
+  title: 'Drawing type'
+  route_name: entity.drawing_type.collection
+  description: 'List Drawing type (bundles)'
+  parent: system.admin_structure
+  weight: 99
