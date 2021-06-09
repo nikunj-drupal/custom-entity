@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * Contains custom_drawing.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function custom_drawing_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the custom_drawing module.
+    case 'help.page.custom_drawing':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function custom_drawing_theme() {
+  $theme = [];
+  $theme['drawing'] = [
+    'render element' => 'elements',
+    'file' => 'drawing.page.inc',
+    'template' => 'drawing',
+  ];
+  $theme['drawing_content_add_list'] = [
+    'render element' => 'content',
+    'variables' => ['content' => NULL],
+    'file' => 'drawing.page.inc',
+  ];
+  return $theme;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function custom_drawing_theme_suggestions_drawing(array $variables) {
+  $suggestions = [];
+  $entity = $variables['elements']['#drawing'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'drawing__' . $sanitized_view_mode;
+  $suggestions[] = 'drawing__' . $entity->bundle();
+  $suggestions[] = 'drawing__' . $entity->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'drawing__' . $entity->id();
+  $suggestions[] = 'drawing__' . $entity->id() . '__' . $sanitized_view_mode;
+  return $suggestions;
+}
+
+/**
+ * Implements hook_views_data_alter
+ */
+function custom_drawing_views_data_alter(array &$data) {
+  $data['drawing']['verified_drawing'] = array(
+    'title' => t('Verified Drawing'),
+    'filter' => array(
+      'title' => t('Verified Drawing'),
+      'help' => t('Shows only drawings that have been verified for games that require verification or all drawings for those that do not.'),
+      'field' => 'id',
+      'id' => 'verified_drawing'
+    ),
+  );
+}

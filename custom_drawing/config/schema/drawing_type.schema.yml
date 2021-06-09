@@ -1,0 +1,12 @@
+custom_drawing.drawing_type.*:
+  type: config_entity
+  label: 'Drawing type config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string
